@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Favorite Person 💕</title>
+    <style>
+        :root {
+            --bg-color: #fff0f3;
+            --card-color: #ffffff;
+            --primary-pink: #ff4d79;
+            --dark-pink: #d92655;
+            --text-color: #4a3639;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Continuous Floating Hearts Background */
+        .bg-heart {
+            position: absolute;
+            color: rgba(255, 77, 121, 0.15);
+            font-size: 20px;
+            pointer-events: none;
+            bottom: -50px;
+            animation: floatUp 6s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-105vh) translateX(var(--drift)) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            text-align: center;
+            background: var(--card-color);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 77, 121, 0.2);
+            max-width: 450px;
+            width: 85%;
+            border: 4px solid #ffb3c6;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+            color: var(--dark-pink);
+            text-shadow: 1px 1px 0px #fff;
+        }
+
+        p.subtitle {
+            font-size: 0.95rem;
+            margin-bottom: 35px;
+            color: #8a686d;
+        }
+
+        /* Heartbeat pulsing button */
+        .heart-btn {
+            background-color: var(--primary-pink);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 0 var(--dark-pink), 0 10px 25px rgba(255, 77, 121, 0.4);
+            transition: all 0.1s ease;
+            outline: none;
+            user-select: none;
+            animation: heartbeat 1.4s infinite alternate ease-in-out;
+        }
+
+        .heart-btn:hover {
+            background-color: #ff668f;
+        }
+
+        .heart-btn:active {
+            transform: translateY(8px);
+            box-shadow: 0 0px 0 var(--dark-pink), 0 4px 12px rgba(255, 77, 121, 0.4);
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.06); }
+        }
+
+        /* Compliment Box */
+        .compliment-box {
+            margin-top: 40px;
+            min-height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.5;
+            color: var(--dark-pink);
+        }
+
+        .fade-in {
+            animation: popIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.8) rotate(-2deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        /* Premium Progress Bar */
+        .meter-container {
+            margin-top: 30px;
+            background: #ffe3e8;
+            border-radius: 15px;
+            padding: 5px;
+            border: 2px solid #ffb3c6;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .meter-bar {
+            height: 16px;
+            width: 10%;
+            background: linear-gradient(90deg, #ff7597, var(--primary-pink), #ff0040);
+            border-radius: 12px;
+            transition: width 0.4s cubic-bezier(0.1, 0.8, 0.1, 1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .meter-label {
+            font-size: 0.85rem;
+            margin-top: 8px;
+            color: #8a686d;
+            display: block;
+            font-weight: bold;
+        }
+
+        /* Secret Golden Ticket Overlay */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(74, 54, 57, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .overlay.active {
+            opacity: 1; pointer-events: auto;
+        }
+
+        .coupon-card {
+            background: linear-gradient(135deg, #fff3e0, #fff);
+            border: 4px dashed #ffb74d;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            max-width: 350px;
+            transform: scale(0.7);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .overlay.active .coupon-card {
+            transform: scale(1);
+        }
+
+        .coupon-card h2 { color: #e65100; margin-top: 0; }
+        .coupon-card p { font-size: 1.1rem; font-weight: 600; margin: 20px 0; color: #5d4037; }
+        
+        .claim-btn {
+            background: #ff9800; color: white; border: none;
+            padding: 10px 25px; font-weight: bold; border-radius: 20px;
+            cursor: pointer; box-shadow: 0 4px 0 #e65100;
+        }
+        .claim-btn:active { transform: translateY(4px); box-shadow: 0 0px 0 #e65100; }
+
+        /* Clicking Particles */
+        .particle { position: absolute; pointer-events: none; animation: burst 1s ease-out forwards; }
+        @keyframes burst {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)) scale(0.2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background music option (optional, put link in src if you want audio) -->
+    <!-- <audio id="bgMusic" src="your-audio-link.mp3" loop></audio> -->
+
+    <div class="container">
+        <h1>Hey Handsome! 🥰</h1>
+        <p class="subtitle">Press the button for your daily dosage of love.</p>
+        
+        <button class="heart-btn" id="loveBtn">
+            TOUCH HERE ❤️
+        </button>
+
+        <div class="compliment-box" id="complimentDisplay">
+            Click to unlock my thoughts... ✨
+        </div>
+
+        <div class="meter-container">
+            <div class="meter-bar" id="loveMeter"></div>
+        </div>
+        <span class="meter-label" id="meterLabel">Current Level: Distantly Crushing (10%)</span>
+    </div>
+
+    <!-- The Surprise Coupon Popup -->
+    <div class="overlay" id="couponOverlay">
+        <div class="coupon-card">
+            <h2>🎉 LOOT DROP! 🎉</h2>
+            <p id="couponText">You just unlocked a free full-body massage voucher!</p>
+            <button class="claim-btn" id="claimBtn">Claim & Continue ❤️</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 📝 CUSTOMIZE COMPLIMENTS HERE ---
+        const compliments = [
+            "Your smile effortlessly makes my entire day brighter. 😊",
+            "I am so incredibly proud of you and how hard you work.",
+            "You are my favorite person to absolutely do nothing with. 🛋️",
+            "Just a reminder: you look stunningly handsome today.",
+            "Thank you for being my safe space and my biggest comfort.",
+            "My favorite place in the world is right next to you. 🌎",
+            "You have the kindest heart, and I'm so lucky you share it with me.",
+            "You are my absolute best friend and my favorite plot twist. 💖",
+            "Even when things get messy, you're the one I want by my side.",
+            "You make me laugh harder than anyone else can! 😂",
+            "I still get butterflies thinking about how lucky I am to have you. 🦋",
+            "You're stuck with me forever, just so you know. No refunds! 🔒"
+        ];
+
+        // --- 📝 CUSTOMIZE YOUR BONUS COUPONS HERE (Every 10 clicks unlocks one!) ---
+        const coupons = [
+            "🎟️ ONE FREE MASSAGE (No expiration date!)",
+            "🍕 A FREE DINNER (Paid for by yours truly, wherever you want)",
+            "🍦 AN IMMEDIATE ICE CREAM RUN ON DEMAND",
+            "🎮 3 HOURS OF UNINTERRUPTED GAMING (I will bring you snacks!)"
+        ];
+
+        const btn = document.getElementById('loveBtn');
+        const display = document.getElementById('complimentDisplay');
+        const meter = document.getElementById('loveMeter');
+        const label = document.getElementById('meterLabel');
+        const overlay = document.getElementById('couponOverlay');
+        const couponText = document.getElementById('couponText');
+        const claimBtn = document.getElementById('claimBtn');
+        
+        let clicks = 0;
+        let lastIndex = -1;
+        let couponIndex = 0;
+
+        // Create continuous background floating hearts
+        setInterval(() => {
+            const bgHeart = document.createElement('div');
+            bgHeart.className = 'bg-heart';
+            bgHeart.innerHTML = ['❤️', '💖', '🌸', '✨'][Math.floor(Math.random() * 4)];
+            bgHeart.style.left = Math.random() * 100 + 'vw';
+            bgHeart.style.setProperty('--drift', (Math.random() * 200 - 100) + 'px');
+            bgHeart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            bgHeart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            document.body.appendChild(bgHeart);
+            setTimeout(() => bgHeart.remove(), 8000);
+        }, 600);
+
+        btn.addEventListener('click', () => {
+            clicks++;
+
+            // 1. Get Random Compliment
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * compliments.length);
+            } while (randomIndex === lastIndex && compliments.length > 1);
+            lastIndex = randomIndex;
+
+            display.classList.remove('fade-in');
+            void display.offsetWidth; 
+            display.textContent = compliments[randomIndex];
+            display.classList.add('fade-in');
+
+            // 2. Dynamic Love Meter & Status Upgrades
+            let progress = Math.min(10 + (clicks * 4), 100);
+            meter.style.width = progress + '%';
+            
+            let status = "Distantly Crushing";
+            if(progress > 25) status = "Hopelessly Devoted 🥰";
+            if(progress > 50) status = "Head Over Heels Headlock 💖";
+            if(progress > 75) status = "Infinitely & Madly In Love 🌍";
+            if(progress == 100) status = "ABSOLUTE OVERFLOW, YOU ARE MY WHOLE HEART! 🎉❤️";
+
+            label.textContent = `Current Status: ${status} (${progress}%)`;
+
+            // 3. The Twist: Surprise Coupon Popup every 10 clicks!
+            if (clicks % 10 === 0) {
+                setTimeout(() => {
+                    couponText.textContent = coupons[couponIndex % coupons.length];
+                    overlay.classList.add('active');
+                    couponIndex++;
+                }, 500);
+            }
+
+            // 4. Click Burst Particles
+            createBurst();
+        });
+
+        claimBtn.addEventListener('click', () => {
+            overlay.classList.remove('active');
+        });
+
+        function createBurst() {
+            const btnRect = btn.getBoundingClientRect();
+            for (let i = 0; i < 10; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.innerHTML = ['❤️', '✨', '🔥', '🥰'][Math.floor(Math.random() * 4)];
+                p.style.left = (btnRect.left + btnRect.width / 2) + 'px';
+                p.style.top = (btnRect.top + btnRect.height / 2) + 'px';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 120 + 60;
+                p.style.setProperty('--x', Math.cos(angle) * speed + 'px');
+                p.style.setProperty('--y', Math.sin(angle) * speed + 'px');
+                
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 1000);
+            }
+        }
+    </script>
+</body>
+</html>
